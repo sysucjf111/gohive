@@ -117,3 +117,15 @@ func TestFormatDSNWithoutDBName(t *testing.T) {
 	ds2 := cfg.FormatDSN()
 	assert.Equal(t, ds2, ds)
 }
+
+func TestDSNWithEscapeChracter(t *testing.T) {
+	ds := "y%2Fxk:Yxk%408756@11.1.110.248:10000/default?batch=100&auth=PLAIN"
+	cfg, e := ParseDSN(ds)
+	assert.Nil(t, e)
+	assert.Equal(t, cfg.User, "y/xk")
+	assert.Equal(t, cfg.Passwd, "Yxk@8756")
+	assert.Equal(t, cfg.Addr, "11.1.110.248:10000")
+	assert.Equal(t, cfg.DBName, "default")
+	assert.Equal(t, cfg.Auth, "PLAIN")
+	assert.Equal(t, cfg.Batch, 100)
+}

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	hiveserver2 "sqlflow.org/gohive/hiveserver2/gen-go/tcliservice"
+	hiveserver2 "github.com/sysucjf111/gohive/hiveserver2/gen-go/tcliservice"
 )
 
 // hiveOptions for opened Hive sessions.

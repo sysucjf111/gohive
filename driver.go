@@ -8,7 +8,8 @@ import (
 
 	"github.com/apache/thrift/lib/go/thrift"
 	bgohive "github.com/beltran/gohive"
-	hiveserver2 "sqlflow.org/gohive/hiveserver2/gen-go/tcliservice"
+
+	hiveserver2 "github.com/sysucjf111/gohive/hiveserver2/gen-go/tcliservice"
 )
 
 type drv struct{}

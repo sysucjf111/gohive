@@ -1,4 +1,4 @@
-module sqlflow.org/gohive
+module github.com/sysucjf111/gohive
 
 go 1.18
 

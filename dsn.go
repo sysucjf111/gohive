@@ -83,10 +83,10 @@ func ParseDSN(dsn string) (*Config, error) {
 	}
 
 	return &Config{
-		User:       user,
-		Passwd:     passwd,
+		User:       tryUnescape(user),
+		Passwd:     tryUnescape(passwd),
 		Addr:       addr,
-		DBName:     dbname,
+		DBName:     tryUnescape(dbname),
 		Auth:       auth,
 		Batch:      batch,
 		SessionCfg: sc,
@@ -109,4 +109,13 @@ func (cfg *Config) FormatDSN() string {
 		}
 	}
 	return dsn
+}
+
+func tryUnescape(str string) string {
+	decodedStr, err := url.QueryUnescape(str)
+	if err != nil {
+		return str
+	}
+
+	return decodedStr
 }
