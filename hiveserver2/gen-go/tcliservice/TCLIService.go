@@ -8,6 +8,7 @@ import(
 	"database/sql/driver"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 	"github.com/apache/thrift/lib/go/thrift"
 )
@@ -6603,10 +6604,59 @@ func (p *TStatus) Equals(other *TStatus) bool {
 }
 
 func (p *TStatus) String() string {
-  if p == nil {
-    return "<nil>"
-  }
-  return fmt.Sprintf("TStatus(%+v)", *p)
+	if p == nil {
+		return "<nil>"
+	}
+
+	var result strings.Builder
+	result.WriteString("TStatus{")
+
+	// StatusCode (非指针类型)
+	result.WriteString(fmt.Sprintf("StatusCode: %s(%d)", p.StatusCode.String(), int64(p.StatusCode)))
+
+	// InfoMessages (切片类型)
+	result.WriteString(", InfoMessages: ")
+	if p.InfoMessages == nil {
+		result.WriteString("<nil>")
+	} else if len(p.InfoMessages) == 0 {
+		result.WriteString("[]")
+	} else {
+		result.WriteString("[")
+		for i, msg := range p.InfoMessages {
+			if i > 0 {
+				result.WriteString(", ")
+			}
+			result.WriteString(fmt.Sprintf("%q", msg))
+		}
+		result.WriteString("]")
+	}
+
+	// SqlState (指针类型)
+	result.WriteString(", SqlState: ")
+	if p.SqlState == nil {
+		result.WriteString("<nil>")
+	} else {
+		result.WriteString(fmt.Sprintf("%q", *p.SqlState))
+	}
+
+	// ErrorCode (指针类型)
+	result.WriteString(", ErrorCode: ")
+	if p.ErrorCode == nil {
+		result.WriteString("<nil>")
+	} else {
+		result.WriteString(fmt.Sprintf("%d", *p.ErrorCode))
+	}
+
+	// ErrorMessage (指针类型)
+	result.WriteString(", ErrorMessage: ")
+	if p.ErrorMessage == nil {
+		result.WriteString("<nil>")
+	} else {
+		result.WriteString(fmt.Sprintf("%q", *p.ErrorMessage))
+	}
+
+	result.WriteString("}")
+	return result.String()
 }
 
 // Attributes:
