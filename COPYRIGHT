@@ -1,0 +1,14 @@
+GoHive: A Go database/sql driver for Hive
+
+Copyright (c) 2019-2026 GoHive contributors.
+
+This project is licensed under the Apache License, Version 2.0.
+See the LICENSE file for the full license text.
+
+Copyrights in this project are retained by their respective contributors.
+No copyright assignment is required to contribute unless separately agreed.
+
+Some files may contain explicit copyright notices or license notices.
+Those notices apply to the corresponding files.
+
+For complete authorship information, see the version control history.
